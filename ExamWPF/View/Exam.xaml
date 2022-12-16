@@ -10,38 +10,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition MinWidth="350"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" Grid.ColumnSpan="3" ItemsSource="{Binding SportItems}" CurrentItem="{Binding CurrentItem}">
-            <DataGrid.Columns>
-                <DataGridTextColumn  Header="Id" Binding="{Binding Id}"  Width="120" />
-                <DataGridTextColumn  Header="Client's name" Binding="{Binding Name}"  Width="120" />
-                <DataGridTextColumn  Header="Work type" Binding="{Binding Price}"  Width="120" />
-                <DataGridTextColumn  Header="Hairdresser's name" Binding="{Binding Type}"  Width="120" />
-            </DataGrid.Columns>
-        </DataGrid>
-        
-        <Button Content="Sell" Grid.Column="1" Grid.Row="1" Command="{Binding Path=DeleteItem}"  Width="100"/>
-        <Button Content="Add" Grid.Column="0" Grid.Row="1" Command="{Binding Path=AddItem}"  Width="100"/>
-        <Button Content="Update" Grid.Column="2" Grid.Row="1" Command="{Binding Path=UpdateItem}"  Width="100"/>
-
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding SportItems}" CurrentItem="{Binding CurrentItem}">
-            <DataGrid.Columns>
-                <DataGridTextColumn  Header="Appointment Id" Binding="{Binding Id}"  Width="120" />
-                <DataGridTextColumn  Header="Date" Binding="{Binding Name}"  Width="120" />
-                <DataGridTextColumn  Header="Time" Binding="{Binding Price}"  Width="120" />
-                <DataGridTextColumn  Header="Client Id" Binding="{Binding Type}"  Width="120" />
-            </DataGrid.Columns>
+        <DataGrid Grid.Row="0" Grid.ColumnSpan="3" AutoGenerateColumns="True" ItemsSource="{Binding Clients}" Width="500" CurrentItem="{Binding CurrentClient}" Margin="10,0,23,0">
+            
         </DataGrid>
 
-        <Button Content="Sell" Grid.Column="1" Grid.Row="3" Command="{Binding Path=DeleteItem}"  Width="100"/>
-        <Button Content="Add" Grid.Column="0" Grid.Row="3" Command="{Binding Path=AddItem}"  Width="100"/>
-        <Button Content="Update" Grid.Column="2" Grid.Row="3" Command="{Binding Path=UpdateItem}"  Width="100"/>
+        <Button Content="Delete Client " Grid.Column="4" Grid.Row="0" Command="{Binding Path=DeleteClient}"  Width="100"/>
+        <Button Content="Add Client" Grid.Column="3" Grid.Row="0" Command="{Binding Path=AddClient}"  Width="100"/>
+        <Button Content="Update Client" Grid.Column="6" Grid.Row="0" Command="{Binding Path=UpdateClient}"  Width="100"/>
+
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="True" ItemsSource="{Binding Appointments}" Width="350" SelectedItem="{Binding CurrentAppointment}">
+            
+        </DataGrid>
+
+        <Button Content="Delete Appointment" Grid.Column="3" Grid.Row="2" Command="{Binding Path=DeleteItem}"  Width="120"/>
+        <Button Content="Add Appointment" Grid.Column="4" Grid.Row="2" Command="{Binding Path=AddItem}" Width="120" />
+        <Button Content="Update Appointment" Grid.Column="5" Grid.Row="2" Command="{Binding Path=UpdateItem}" Width="120" />
     </Grid>
 </UserControl>

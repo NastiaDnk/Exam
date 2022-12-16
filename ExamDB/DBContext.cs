@@ -79,47 +79,41 @@ namespace ExamDB
                 new AppointmentEntity
                 {
                     Id = 1,
-                    AppointmentDate = new DateOnly(2022, 12, 25),
-                    AppointmentTime = new TimeOnly(10, 20),
+                    AppointmentDateTime = new DateTime(2022,12, 30, 9, 45, 0),
                     ClientID = 1
-                   
+
                 },
                 new AppointmentEntity
                 {
                     Id = 2,
-                    AppointmentDate = new DateOnly(2022, 12, 28),
-                    AppointmentTime = new TimeOnly(14, 30),
+                    AppointmentDateTime = new DateTime(2022,12, 30, 10, 45, 0),
                     ClientID = 2
                 },
                 new AppointmentEntity
                 {
                     Id = 3,
-                    AppointmentDate = new DateOnly(2022, 12, 29),
-                    AppointmentTime = new TimeOnly(9, 45),
+                    AppointmentDateTime = new DateTime(2022,12, 30, 11, 15, 0),
                     ClientID = 3
                 },
                 new AppointmentEntity
                 {
                     Id = 4,
-                    AppointmentDate = new DateOnly(2023, 1, 3),
-                    AppointmentTime = new TimeOnly(18, 15),
+                    AppointmentDateTime = new DateTime(2022,12, 30, 14, 30, 0),
                     ClientID = 4
                 },
                 new AppointmentEntity
                 {
                     Id = 5,
-                    AppointmentDate = new DateOnly(2023, 1, 4),
-                    AppointmentTime = new TimeOnly(17, 20),
+                    AppointmentDateTime = new DateTime(2022,12, 30, 16, 0, 0),
                     ClientID = 5
                 },
                 new AppointmentEntity
                 {
                     Id = 6,
-                    AppointmentDate = new DateOnly(2023, 1, 4),
-                    AppointmentTime = new TimeOnly(19, 30),
+                    AppointmentDateTime = new DateTime(2022,12, 30, 18, 10, 0),
                     ClientID = 6
                 }
-            });
+            }); ;
 
 
         }

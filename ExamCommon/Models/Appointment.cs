@@ -8,8 +8,8 @@ namespace ExamCommon.Models
 {
     public class Appointment
     {
-        public DateOnly AppointmentDate { get; set; }
-        public TimeOnly AppointmentTime { get; set; }
+        public int Id { get; set; }
+        public DateTime AppointmentDateTime { get; set; }
         public int ClientID { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace ExamCommon.Models
 {
     public class Client
     {
+        public int Id { get; set; }
         public string ClientName { get; set; }
         public WorkType WorkType { get; set; }
         public string HairdresserName { get; set; }

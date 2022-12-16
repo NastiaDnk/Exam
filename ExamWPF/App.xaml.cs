@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ExamWPF.ViewModel;
 using System.Windows;
 
 namespace ExamWPF
@@ -13,5 +8,12 @@ namespace ExamWPF
     /// </summary>
     public partial class App : Application
     {
+        private ExamViewModel _viewModel;
+        public App()
+        {
+            _viewModel = new ExamViewModel();
+            var window = new MainWindow() { DataContext = _viewModel };
+            window.Show();
+        }
     }
 }

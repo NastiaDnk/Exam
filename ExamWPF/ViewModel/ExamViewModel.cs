@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http.Json;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ExamWPF.Commands;
 using ExamCommon.Models;
@@ -13,14 +10,13 @@ using Newtonsoft.Json;
 
 namespace ExamWPF.ViewModel
 {
-    public class ExamViewModel:ViewModelBase
+    public class ExamViewModel : ViewModelBase
     {
         private ObservableCollection<Client> _clients;
         private Client _currentClient;
         private ICommand _deleteClient;
         private ICommand _addClient;
         private ICommand _updateClient;
-
 
         private ObservableCollection<Appointment> _appointmants;
         private Appointment _currentAppointment;
@@ -31,52 +27,78 @@ namespace ExamWPF.ViewModel
         private HttpClient httpClient = new HttpClient();
         public ExamViewModel()
         {
-            var json = httpClient.GetStringAsync("https://localhost:44335/api/").Result;
+            var json = httpClient.GetStringAsync("https://localhost:5001/api/Client").Result;
             var list = JsonConvert.DeserializeObject<List<Client>>(json);
             Clients = new ObservableCollection<Client>(list);
+
+            var json2 = httpClient.GetStringAsync("https://localhost:5001/api/Appointment").Result;
+            var list2 = JsonConvert.DeserializeObject<List<Appointment>>(json2);
+            Appointments = new ObservableCollection<Appointment>(list2);
+
             AddClient = new MyCommand(_ => AddClientMethod());
+            DeleteClient = new MyCommand(_ => DeleteClientMethod());
+            UpdateClient = new MyCommand(_ => UpdateClientMethod());
+            AddAppointment = new MyCommand(_ => AddAppointmentMethod());
+            DeleteAppointment = new MyCommand(_ => DeleteAppointmentMethod());
+            UpdateAppointment = new MyCommand(_ => UpdateAppointmentMethod());
         }
         public ObservableCollection<Client> Clients
         {
             get { return _clients; }
             set { _clients = value; }
         }
-        public Client CurrentItem
+        public ObservableCollection<Appointment> Appointments
+        {
+            get { return _appointmants; }
+            set { _appointmants = value; }
+        }
+        public Client CurrentClient
         {
             get { return _currentClient; }
             set { _currentClient = value; }
         }
-        public ICommand DeleteItem
+        public Appointment CurrentAppointment
         {
-            get
-            {
-                _deleteClient ??= new MyCommand(_ => DeleteClientMethod());
-                return _deleteClient;
-            }
+            get { return _currentAppointment; }
+            set { _currentAppointment = value; }
+        }
+        public ICommand DeleteClient
+        {
+            get { return _deleteClient; }
+            set { _deleteClient = value; }
         }
         public ICommand AddClient
         {
-            get
-            {
-                return _addClient;
-            }
+            get { return _addClient; }
             set { _addClient = value; }
         }
-        public ICommand UpdateItem
+        public ICommand UpdateClient
         {
-            get
-            {
-                _updateClient ??= new MyCommand(_ => UpdateClientMethod());
-                return _updateClient;
-            }
+            get { return _updateClient; }
+            set { _updateClient = value; }
+        }
+        public ICommand DeleteAppointment
+        {
+            get { return _deleteAppointment; }
+            set { _deleteAppointment = value; }
+        }
+        public ICommand AddAppointment
+        {
+            get { return _addAppointment; }
+            set { _addAppointment = value; }
+        }
+        public ICommand UpdateAppointment
+        {
+            get { return _updateAppointment; }
+            set { _updateAppointment = value; }
         }
         private void DeleteClientMethod()
         {
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = JsonContent.Create(CurrentItem),
+                Content = JsonContent.Create(CurrentClient),
                 Method = HttpMethod.Delete,
-                RequestUri = new Uri("https://localhost:5001/api/", UriKind.Relative)
+                RequestUri = new Uri("https://localhost:5001/api/Client")
             };
             httpClient.SendAsync(request).Wait();
         }
@@ -84,9 +106,9 @@ namespace ExamWPF.ViewModel
         {
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = JsonContent.Create(CurrentItem),
+                Content = JsonContent.Create(CurrentClient),
                 Method = HttpMethod.Post,
-                RequestUri = new Uri("https://localhost:5001/api/", UriKind.Relative)
+                RequestUri = new Uri("https://localhost:5001/api/Client")
             };
             httpClient.SendAsync(request).Wait();
         }
@@ -94,9 +116,40 @@ namespace ExamWPF.ViewModel
         {
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = JsonContent.Create(CurrentItem),
+                Content = JsonContent.Create(CurrentClient),
                 Method = HttpMethod.Put,
-                RequestUri = new Uri("https://localhost:5001/api/", UriKind.Relative)
+                RequestUri = new Uri("https://localhost:5001/api/Client")
+            };
+            httpClient.SendAsync(request).Wait();
+        }
+
+        private void DeleteAppointmentMethod()
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Content = JsonContent.Create(CurrentAppointment),
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri("https://localhost:5001/api/Appointment")
+            };
+            httpClient.SendAsync(request).Wait();
+        }
+        private void AddAppointmentMethod()
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Content = JsonContent.Create(CurrentAppointment),
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("https://localhost:5001/api/Appointment")
+            };
+            httpClient.SendAsync(request).Wait();
+        }
+        private void UpdateAppointmentMethod()
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Content = JsonContent.Create(CurrentAppointment),
+                Method = HttpMethod.Put,
+                RequestUri = new Uri("https://localhost:5001/api/Appointment")
             };
             httpClient.SendAsync(request).Wait();
         }

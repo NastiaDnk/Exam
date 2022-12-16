@@ -10,10 +10,7 @@ namespace ExamDB.Models
     public class AppointmentEntity
     {
         public int Id { get; set; }
-        [NotMapped]
-        public DateOnly AppointmentDate { get; set; }
-        [NotMapped]
-        public TimeOnly AppointmentTime { get; set; }
+        public DateTime AppointmentDateTime { get; set; }
         [ForeignKey ("Client")]
         public int ClientID { get; set; }
 

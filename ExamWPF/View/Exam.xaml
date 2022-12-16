@@ -20,7 +20,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" Grid.ColumnSpan="3" AutoGenerateColumns="True" ItemsSource="{Binding Clients}" Width="500" CurrentItem="{Binding CurrentClient}" Margin="10,0,23,0">
+        <DataGrid Grid.Row="0" Grid.ColumnSpan="3" AutoGenerateColumns="True" ItemsSource="{Binding Clients}" Width="500" SelectedItem="{Binding CurrentClient}" Margin="10,0,23,0">
             
         </DataGrid>
 

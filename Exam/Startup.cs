@@ -3,6 +3,8 @@ using ExamCommon.Mapper;
 using ExamDB.Interfaces;
 using ExamDB.DBOperations;
 using ExamDB;
+using ExamCommon.Interfaces;
+using ExamCommon.Managers;
 
 public class Startup
 {
@@ -24,11 +26,17 @@ public class Startup
         });
         IMapper mapper = new Mapper(mapConfig);
         var connectionStrings = Configuration.GetSection("ConnectionStrings");
+
         services.AddSingleton<IAppointmentDBOperations, AppointmentDBOperations>();
         services.AddSingleton<IClientDBOperations, ClientDBOperations>();
+
+        services.AddSingleton<IClientManager, ClientManager>();
+        services.AddSingleton<IAppointmentManager, AppointmentManager>();
+
         services.AddSingleton(mapper);
         services.AddSqlServer<DBContext>(connectionStrings["CarsDbContext"]);
         services.AddDbContext<DBContext>();
+
         services.AddControllers();
         services.AddCors();
     }

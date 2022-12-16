@@ -25,9 +25,12 @@ namespace ExamDB.DBOperations
             }
         }
 
-        public Task DeleteAppointment(AppointmentEntity entity)
+        public async Task DeleteAppointment(AppointmentEntity entity)
         {
-            throw new NotImplementedException();
+            using (DBContext dbContext = GetDBContext())
+            {
+                dbContext.Appointment.Remove(entity);
+            }
         }
 
         public async Task<List<AppointmentEntity>> GetAllAppointmants()

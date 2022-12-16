@@ -15,5 +15,6 @@ namespace ExamDB.Interfaces
         Task<List<AppointmentEntity>> GetAllAppointmants();
 
         Task<AppointmentEntity> GetAppointmentById(int id);
+        Task<AppointmentEntity> GetAppointmentByClientId(int id);
     }
 }

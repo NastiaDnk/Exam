@@ -15,9 +15,14 @@ namespace ExamDB.DBOperations
             return new DBContext();
         }
 
-        public Task<AppointmentEntity> AddAppointment(AppointmentEntity entity)
+        public async Task<AppointmentEntity> AddAppointment(AppointmentEntity entity)
         {
-            throw new NotImplementedException();
+            using (DBContext dbContext = GetDBContext())
+            {
+                dbContext.Appointment.Add(entity);
+                await dbContext.SaveChangesAsync();
+                return entity;
+            }
         }
 
         public Task DeleteAppointment(AppointmentEntity entity)
@@ -25,19 +30,38 @@ namespace ExamDB.DBOperations
             throw new NotImplementedException();
         }
 
-        public Task<List<AppointmentEntity>> GetAllAppointmants()
+        public async Task<List<AppointmentEntity>> GetAllAppointmants()
         {
-            throw new NotImplementedException();
+            using (DBContext dbContext = GetDBContext())
+            {
+                return dbContext.Appointment.ToList();
+            }
         }
 
-        public Task<AppointmentEntity> GetAppointmentById(int id)
+        public async Task<AppointmentEntity> GetAppointmentById(int id)
         {
-            throw new NotImplementedException();
+            using (DBContext dbContext = GetDBContext())
+            {
+                return dbContext.Appointment.First(ap => ap.Id == id);
+            }
         }
 
-        public Task<AppointmentEntity> UpdateAppointment(AppointmentEntity entity)
+        public async Task<AppointmentEntity> GetAppointmentByClientId(int id)
         {
-            throw new NotImplementedException();
+            using (DBContext dbContext = GetDBContext())
+            {
+                return dbContext.Appointment.First(ap => ap.ClientID == id);
+            }
+        }
+
+        public async Task<AppointmentEntity> UpdateAppointment(AppointmentEntity entity)
+        {
+            using (DBContext dbContext = GetDBContext())
+            {
+                dbContext.Appointment.Update(entity);
+                await dbContext.SaveChangesAsync();
+                return entity;
+            }
         }
     }
 }

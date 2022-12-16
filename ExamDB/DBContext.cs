@@ -11,7 +11,7 @@ namespace ExamDB
 {
     public class DBContext : DbContext
     {
-        private string _connectionString = "Server=DESKTOP-SM098C1;Database=cars;Trusted_Connection=True;";
+        private string _connectionString = "Server=DESKTOP-2A9VHRE;Database=Exam;Trusted_Connection=True;TrustServerCertificate=True;";
         public DBContext(string connectionString)
         {
             _connectionString = connectionString;

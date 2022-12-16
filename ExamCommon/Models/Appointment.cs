@@ -10,6 +10,6 @@ namespace ExamCommon.Models
     {
         public DateOnly AppointmentDate { get; set; }
         public TimeOnly AppointmentTime { get; set; }
-        public virtual Client MyClient { get; set; }
+        public int ClientID { get; set; }
     }
 }

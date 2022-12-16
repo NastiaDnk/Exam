@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExamDB.DBOperations
 {
-    public class AppointmantDBOperations : IAppointmentDBOperations
+    public class AppointmentDBOperations : IAppointmentDBOperations
     {
         private DBContext GetDBContext()
         {
